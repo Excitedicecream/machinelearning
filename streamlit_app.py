@@ -40,3 +40,12 @@ with st.expander('3D Data Visualisation'):
 
     fig = px.scatter_3d(df, x=col1, y=col2, z=col3, color='species', size_max=10)
     st.plotly_chart(fig, use_container_width=True)
+
+
+#Data Preperation
+with st.sidebar:
+    st.headder('Input Features')
+    island=st.selectbox('Island', ('BIscoe','Dream', 'Torgesen'))
+    gendre=st.selectbox('Gender',('Female','Male'))
+    bill_length_mm=st.select_slider('Bill Length(mm)', 32.1,59.6,43.9)
+                        
