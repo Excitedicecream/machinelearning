@@ -22,21 +22,32 @@ with st.expander('Data'):
     st.dataframe(y)
 
 
+# ✅ Detailed Statistics with Dropdown
 with st.expander("Show Detailed Statistics"):
     st.write("### Basic Statistics")
 
-    # Calculate all stats
-    stats = pd.DataFrame({
-        "Min": df.min(),
-        "Max": df.max(),
-        "Mean": df.mean(),
-        "Median": df.median(),
-        "Std Dev": df.std(),
-        "Variance": df.var()
-    })
+    # Select numeric column for statistics
+    numeric_columns = df.select_dtypes(['float64', 'int64']).columns.tolist()
+    selected_column = st.selectbox("Select a column to view statistics", options=numeric_columns)
 
-    # Display stats as a nice table
-    st.write(stats)
+    # Calculate stats for selected column
+    stats = {
+        "Min": df[selected_column].min(),
+        "Max": df[selected_column].max(),
+        "Mean": df[selected_column].mean(),
+        "Median": df[selected_column].median(),
+        "Std Dev": df[selected_column].std(),
+        "Variance": df[selected_column].var()
+    }
+
+    # Display stats
+    st.write(f"### Statistics for **{selected_column}**")
+    st.write(pd.DataFrame(stats, index=[selected_column]))
+
+    # Optional: Full describe table for all columns
+    with st.expander("Show All Columns Summary"):
+        st.write(df.describe())
+
     
 with st.expander('2D Data Visualisation'):
     st.write('**Scatter Plot**')
