@@ -22,24 +22,21 @@ with st.expander('Data'):
     st.dataframe(y)
 
 
-with st.expander("Show Column Statistics"):
-    col = st.selectbox("Select a column", df.columns[:-1])  # Only numeric columns
-    stat = st.selectbox("Select a statistic", ["Minimum", "Maximum", "Mean", "Standard Deviation", "Range", "Median"])
+with st.expander("Show Detailed Statistics"):
+    st.write("### Basic Statistics")
 
-    if stat == "Minimum":
-        value = df[col].min()
-    elif stat == "Maximum":
-        value = df[col].max()
-    elif stat == "Mean":
-        value = df[col].mean()
-    elif stat == "Standard Deviation":
-        value = df[col].std()
-    elif stat == "Range":
-        value = df[col].max() - df[col].min()
-    elif stat == "Median":
-        value = df[col].median()
+    # Calculate all stats
+    stats = pd.DataFrame({
+        "Min": df.min(),
+        "Max": df.max(),
+        "Mean": df.mean(),
+        "Median": df.median(),
+        "Std Dev": df.std(),
+        "Variance": df.var()
+    })
 
-    st.write(f"**{stat} of {col}:** {value:.2f}")
+    # Display stats as a nice table
+    st.write(stats)
     
 with st.expander('2D Data Visualisation'):
     st.write('**Scatter Plot**')
