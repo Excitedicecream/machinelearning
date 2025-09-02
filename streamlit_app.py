@@ -73,19 +73,22 @@ with st.expander('3D Data Visualisation'):
 #Data Preperation
 with st.sidebar:
     st.header('Input Features')
-    island=st.selectbox('Island', ('Biscoe','Dream', 'Torgesen'))
-    gendre=st.selectbox('Gender',('female','male'))
-    bill_length_mm=st.slider('Bill Length(mm)', 32.1,59.6,43.9)
-    bill_depth_mm = st.slider('Bill Depth (mm)', min_value=13.1, max_value=21.5, value=17.0, label_visibility="hidden")
-    flipper_length_mm = st.slider('Flipper Length (mm)', min_value=172, max_value=231, value=200, disabled=True)
+    island = st.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
+    gender = st.selectbox('Gender', ('female', 'male'))
+    bill_length_mm = st.slider('Bill Length (mm)', 32.1, 59.6, 43.9)
+    bill_depth_mm = st.slider('Bill Depth (mm)', min_value=13.1, max_value=21.5, value=17.0)
+    flipper_length_mm = st.slider('Flipper Length (mm)', min_value=172, max_value=231, value=200)
     body_mass_g = st.slider('Body Mass (g)', min_value=2700, max_value=6300, value=4200)
-                        
-#Create a dataframe for the imput features
-data={'island':island,
-      'gender':gender,
-      'bill_length_mm':bill_lengeth_mm,
-      'bill_depth_mm':bill_depth_mm,
-      'flipper_length_mm':flipper_length_mm,
-      'body_mass_g':body_mass_g}
-input_df=pd.DataFrame(data,index=[0])
+
+# ✅ Create a dataframe for the input features
+input_data = {
+    'island': island,
+    'gender': gender,
+    'bill_length_mm': bill_length_mm,
+    'bill_depth_mm': bill_depth_mm,
+    'flipper_length_mm': flipper_length_mm,
+    'body_mass_g': body_mass_g
+}
+input_df = pd.DataFrame(input_data, index=[0])
+input_df
 input_df
