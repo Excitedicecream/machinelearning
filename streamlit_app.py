@@ -1,13 +1,13 @@
 import streamlit as st
 import pandas as pd
-from nympy.random import default_rng as rng
+from numpy.random import default_rng as rng
 
 st.title('Machine Learning App 🤖')
 
 st.info('This app build a machine learning model')
 
 with st.expander('Data'):
-  st.write('**Raw Data')
+  st.write('**Raw Data**')
   df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/refs/heads/master/penguins_cleaned.csv')
   df
 
@@ -21,4 +21,4 @@ with st.expander('Data'):
 
 with st.expander('Data Visualisation')
 #"species","island","bill_length_mm","bill_depth_mm","flipper_length_mm","body_mass_g","sex"
-  st.scatter_chart(data=df, x=bill_length_mm, y=bill_mass_g, color=species)
+  st.scatter_chart(data=df, x=bill_length_mm, y=body_mass_g, color=species)
