@@ -30,3 +30,12 @@ with st.expander('Data Visualisation'):
 
     # Plot scatter chart
     st.scatter_chart(data=df, x=x_axis, y=y_axis, color='species')
+
+with st.expander('3D Data Visualisation'):
+    st.write('**3D Scatter Plot**')
+    col1 = st.selectbox('Select X-axis', options=numeric_columns, index=0)
+    col2 = st.selectbox('Select Y-axis', options=numeric_columns, index=1)
+    col3 = st.selectbox('Select Z-axis', options=numeric_columns, index=2)
+
+    fig = px.scatter_3d(df, x=col1, y=col2, z=col3, color='species', size_max=10)
+    fig.show()
