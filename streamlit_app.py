@@ -91,4 +91,4 @@ data = {
 }
 
 input_df = pd.DataFrame(data)
-df
+st.dataframe(input_df)
