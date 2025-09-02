@@ -34,9 +34,12 @@ with st.expander('Data Visualisation'):
 
 with st.expander('3D Data Visualisation'):
     st.write('**3D Scatter Plot**')
-    col1 = st.selectbox('Select X-axis', options=numeric_columns, index=0)
-    col2 = st.selectbox('Select Y-axis', options=numeric_columns, index=1)
-    col3 = st.selectbox('Select Z-axis', options=numeric_columns, index=2)
+    col1 = st.selectbox('Select X-axis', options=numeric_columns, index=0, key='x_axis_3d')
+    col2 = st.selectbox('Select Y-axis', options=numeric_columns, index=1, key='y_axis_3d')
+    col3 = st.selectbox('Select Z-axis', options=numeric_columns, index=2, key='z_axis_3d')
+
+    fig = px.scatter_3d(df, x=col1, y=col2, z=col3, color='species', size_max=10)
+    st.plotly_chart(fig, use_container_width=True)
 
     fig = px.scatter_3d(df, x=col1, y=col2, z=col3, color='species', size_max=10)
     st.plotly_chart(fig, use_container_width=True)
