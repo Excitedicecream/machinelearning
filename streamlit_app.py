@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.title('Machine Learning App 🤖')
 
@@ -38,4 +39,4 @@ with st.expander('3D Data Visualisation'):
     col3 = st.selectbox('Select Z-axis', options=numeric_columns, index=2)
 
     fig = px.scatter_3d(df, x=col1, y=col2, z=col3, color='species', size_max=10)
-    fig.show()
+    st.plotly_chart(fig, use_container_width=True)
