@@ -21,7 +21,27 @@ with st.expander('Data'):
     y = df['species']
     st.dataframe(y)
 
-with st.expander('Data Visualisation'):
+
+with st.expander("Show Column Statistics"):
+    col = st.selectbox("Select a column", df.columns[:-1])  # Only numeric columns
+    stat = st.selectbox("Select a statistic", ["Minimum", "Maximum", "Mean", "Standard Deviation", "Range", "Median"])
+
+    if stat == "Minimum":
+        value = df[col].min()
+    elif stat == "Maximum":
+        value = df[col].max()
+    elif stat == "Mean":
+        value = df[col].mean()
+    elif stat == "Standard Deviation":
+        value = df[col].std()
+    elif stat == "Range":
+        value = df[col].max() - df[col].min()
+    elif stat == "Median":
+        value = df[col].median()
+
+    st.write(f"**{stat} of {col}:** {value:.2f}")
+    
+with st.expander('2D Data Visualisation'):
     st.write('**Scatter Plot**')
 
     # Dropdown for X and Y axis
@@ -45,7 +65,10 @@ with st.expander('3D Data Visualisation'):
 #Data Preperation
 with st.sidebar:
     st.header('Input Features')
-    island=st.selectbox('Island', ('BIscoe','Dream', 'Torgesen'))
-    gendre=st.selectbox('Gender',('Female','Male'))
+    island=st.selectbox('Island', ('Biscoe','Dream', 'Torgesen'))
+    gendre=st.selectbox('Gender',('female','male'))
     bill_length_mm=st.slider('Bill Length(mm)', 32.1,59.6,43.9)
+    bill_depth_mm = st.slider('Bill Depth (mm)', min_value=13.1, max_value=21.5, value=17.0)
+    flipper_length_mm = st.slider('Flipper Length (mm)', min_value=172, max_value=231, value=200)
+    body_mass_g = st.slider('Body Mass (g)', min_value=2700, max_value=6300, value=4200)
                         
