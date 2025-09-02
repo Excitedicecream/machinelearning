@@ -80,3 +80,11 @@ with st.sidebar:
     flipper_length_mm = st.slider('Flipper Length (mm)', min_value=172, max_value=231, value=200, disabled=True)
     body_mass_g = st.slider('Body Mass (g)', min_value=2700, max_value=6300, value=4200)
                         
+#Create a dataframe for the imput features
+data={'island':island,
+      'gender':gender,
+      'bill_length_mm':bill_lengeth_mm,
+      'bill_depth_mm':bill_depth_mm,
+      'flipper_length_mm':flipper_length_mm,
+      'body_mass_g':body_mass_g}
+input_df=pd.DataFrame(data,index=[0])
