@@ -70,7 +70,7 @@ with st.expander('3D Data Visualisation'):
     st.plotly_chart(fig, use_container_width=True)
 
 
-#Data Preperation
+# Data Preparation
 with st.sidebar:
     st.header('Input Features')
     island = st.selectbox('Island', ('Biscoe', 'Dream', 'Torgersen'))
@@ -82,13 +82,16 @@ with st.sidebar:
 
 # ✅ Create a dataframe for the input features
 data = {
-    'island': island,
-    'gender': gender,
-    'bill_length_mm': bill_length_mm,
-    'bill_depth_mm': bill_depth_mm,
-    'flipper_length_mm': flipper_length_mm,
-    'body_mass_g': body_mass_g
+    'island': [island],
+    'gender': [gender],
+    'bill_length_mm': [bill_length_mm],
+    'bill_depth_mm': [bill_depth_mm],
+    'flipper_length_mm': [flipper_length_mm],
+    'body_mass_g': [body_mass_g]
 }
-    input_df = pd.DataFrame(data, index=[0])
-st.dataframe(input_df)
 
+input_df = pd.DataFrame(data)
+
+# ✅ Display it in the main page
+st.subheader("Your Input Features")
+st.dataframe(input_df)
