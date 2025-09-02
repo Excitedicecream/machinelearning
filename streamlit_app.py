@@ -91,5 +91,10 @@ data = {
 }
 
 input_df = pd.DataFrame(data)
-st.dataframe(input_df)
+input_penguins = pd.concat([input_df, X_raw], axis=0)
 
+with st.expander('Input features'):
+    st.write('**Input penguin**')
+    input_df
+    st.write('Combined penguin data**')
+    input_penguines
