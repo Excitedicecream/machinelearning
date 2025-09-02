@@ -94,4 +94,4 @@ input_df = pd.DataFrame(data)
 
 # ✅ Display it in the main page
 st.subheader("Your Input Features")
-st.dataframe(input_df)
+st.write(input_df)  # You can use st.write() or st.dataframe()
