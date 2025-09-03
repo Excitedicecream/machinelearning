@@ -14,12 +14,12 @@ with st.expander('Data'):
     st.dataframe(df)
 
     st.write('**X**')
-    X = df.drop('species', axis=1)
-    st.dataframe(X)
+    X_raw = df.drop('species', axis=1)
+    st.dataframe(X_raw)
 
     st.write('**y**')
-    y = df['species']
-    st.dataframe(y)
+    y_raw = df['species']
+    st.dataframe(y_raw)
 
 
 # ✅ Detailed Statistics with Dropdown
@@ -99,7 +99,9 @@ with st.expander('Input features'):
     st.write('Combined penguin data**')
     input_penguins
     
-    #Encode
+    #Encode X
     encode = ['island', 'sex']
     df_penguins = pd.get_dummies(input_penguins, columns=encode)
     df_penguins[:1]
+
+    #Encode y
