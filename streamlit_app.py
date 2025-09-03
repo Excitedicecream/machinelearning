@@ -102,4 +102,4 @@ with st.expander('Input features'):
 #Encode
 encode = ['island', 'sex']
 df_penguins = pd.get_dummies(input_penguins, columns=encode)
-df_penguins
+df_penguins[:1]
