@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from sklearn.ensemble import RandomForestClassifier
 
 st.title('Machine Learning App 🤖')
 
-st.info('This app builds a machine learning model')
-
+st.info('This app was developed by [Data Professor](https://www.youtube.com/watch?v=LJ6DcLGQ4vY)')
 # Load data
 df = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/data/refs/heads/master/penguins_cleaned.csv')
 
@@ -102,12 +102,56 @@ with st.expander('Input features'):
     #Encode X
     encode = ['island', 'sex']
     df_penguins = pd.get_dummies(input_penguins, columns=encode)
-    df_penguins[:1]
+    input_df = df_penguins[:1] #Selects only the first row (the user input data)
+    X=df_penguins[1:] #Selects all rows except the first row (the original penguin data)
+    
 
     #Encode y
     st.write('**y**')
     target = df['species']
+    target_mapper = {'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2}      
     target
+
+    def target_encode(val):
+        return target_mapper[val]
+
+with st.expander('Data preparation'):
+    st.write('**Encoded Input penguin**')
+    input_row=df_penguins[:1]
+    st.write('**Encoded y**')
+    y= target.apply(target_encode)
+    y
+
+
+#model building
+CLF = RandomForestClassifier()
+#train the model
+CLF.fit(X,y)
+#make predictions
+pred = CLF.predict(input_row)
+pred_prob = CLF.predict_proba(input_row)
+species = ['Adelie', 'Chinstrap', 'Gentoo']
+pred_df = pd.DataFrame(pred_prob, columns=species)
+
+st.dataframe(
+    pred_df,
+    column_config={
+        "Adelie": st.column_config.ProgressColumn(
+            "Adelie", format="%.2f", min_value=0.0, max_value=1.0
+        ),
+        "Chinstrap": st.column_config.ProgressColumn(
+            "Chinstrap", format="%.2f", min_value=0.0, max_value=1.0
+        ),
+        "Gentoo": st.column_config.ProgressColumn(
+            "Gentoo", format="%.2f", min_value=0.0, max_value=1.0
+        ),
+    },
+    use_container_width=True,
+)
+st.write("### Prediction")
+st.write(f"Predicted species: **{species[pred[0]]}**")
+
+
 
 
     
